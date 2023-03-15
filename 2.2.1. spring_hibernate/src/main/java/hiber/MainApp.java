@@ -14,37 +14,16 @@ public class MainApp {
         AnnotationConfigApplicationContext context =
                 new AnnotationConfigApplicationContext(AppConfig.class);
         UserService userService = context.getBean(UserService.class);
-        User user1 = new User("Sabir", "Dadashev", "Sabir_93d@mail.ru");
-        user1.setCar(new Car("test", 1235));
-        User user2 = new User("Sabir1", "Dadashev1", "Sabir_93d@mail.ru1");
-        user2.setCar(new Car("test", 1235));
-        User user3 = new User("Sabir2", "Dadashev2", "Sabir_93d@mail.ru2");
-        user3.setCar(new Car("test", 235));
-        User user4 = new User("Sabir3", "Dadashev3", "Sabir_93d@mail.ru3");
-        user4.setCar(new Car("test3", 35));
-        userService.add(user1);
-        userService.add(user2);
-        userService.add(user3);
-        userService.add(user4);
+        userService.add(new User("Sabir", "Dadashev", "Sabir_93d@mail.ru", new Car("test", 1235)));
+        userService.add(new User("Sabir1", "Dadashev1", "Sabir_93d@mail.ru1", new Car("test", 1235)));
+        userService.add(new User("Sabir2", "Dadashev2", "Sabir_93d@mail.ru2", new Car("test", 235)));
+        userService.add(new User("Sabir3", "Dadashev3", "Sabir_93d@mail.ru3", new Car("test3", 35)));
         List<User> users = userService.listUsers();
-        for (User user : users) {
-            System.out.println("Id = " + user.getId());
-            System.out.println("First Name = " + user.getFirstName());
-            System.out.println("Last Name = " + user.getLastName());
-            System.out.println("Email = " + user.getEmail());
-            System.out.println();
-        }
-        users = userService.listUsersCar("test",1235);
-        for (User user : users) {
-            System.out.println("Id = " + user.getId());
-            System.out.println("First Name = " + user.getFirstName());
-            System.out.println("Last Name = " + user.getLastName());
-            System.out.println("Email = " + user.getEmail());
-            System.out.println("Car.Model = " + user.getCar().getModel());
-            System.out.println("Car.Series = " + user.getCar().getSeries());
-            System.out.println();
-        }
-
+        System.out.println("Все пользователи:");
+        users.forEach(user -> System.out.println(user));
+        users = userService.listUsersCar("test", 1235);
+        System.out.println("Пользователи с машиной Модель:Test серия:1235:");
+        users.forEach(user -> System.out.println(user));
         context.close();
     }
 }

@@ -19,6 +19,15 @@ public class Car {
 
     }
 
+    @Override
+    public String toString() {
+        return "Car{" +
+                "id=" + id +
+                ", model='" + model + '\'' +
+                ", series=" + series +
+                '}';
+    }
+
     public Car(String model, int series) {
 
         this.model = model;
